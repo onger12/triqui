@@ -1,7 +1,9 @@
 import view.MenuPrincipal;
+import view.Modes;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        MenuPrincipal mp = new MenuPrincipal();
+        Modes m = new Modes();
+        MenuPrincipal mp = new MenuPrincipal(m);
     }
 }
