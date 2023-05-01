@@ -14,12 +14,16 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class MenuPrincipal extends JFrame {
-  int WIDTH = 800, HEIGHT = 800;
+  private final int WIDTH = 800, HEIGHT = 800;
   
   public Modes m;
+  public Credenciales c;
   public JLabel jlTitulo, jlBanner, jlCurrentMode;
   public JButton jbInfo, jbMode, jbDesc, jbPlay;
   public JPanel jpButtonsContainer;
+  public String player1Nickname, player2Nickname;
+  Tablero t;
+  private MenuPrincipalController mpc;
 
   // constants
   int BTN_MAIN_HEIGHT = 55; // altura de los botones dentro del panel
@@ -28,11 +32,13 @@ public class MenuPrincipal extends JFrame {
   int 
     BTTC_WIDTH = (WIDTH / 4) * 3,  // BTTC_WIDTH : ButtonContainerWidth
     BTTC_HEIGHT = (BTN_MAIN_HEIGHT * BTN_COUNT) + (BTN_MAIN_VERTICAL_MARGIN * (BTN_COUNT - 1)); // BTTC_HEIGHT : ButtonContainerHeight
-  int CURRENT_MODE = Utils.PVP_MODE;
+  public int CURRENT_MODE = Utils.COM_MODE;
 
   public MenuPrincipal() {
     super("Triqui");
     this.m = new Modes(this);
+    this.mpc = new MenuPrincipalController(this);
+    this.t = new Tablero(this);
 
     setSize(WIDTH, HEIGHT);
     setLocationRelativeTo(null);
@@ -55,7 +61,7 @@ public class MenuPrincipal extends JFrame {
     setHovers();
 
     // init current mode jlabel
-    this.jlCurrentMode = new JLabel("Prueba de modo");
+    this.jlCurrentMode = new JLabel(player1Nickname);
     jlCurrentMode.setFont(new Font("Fira Code", Font.PLAIN, 15));
     jlCurrentMode.setForeground(Color.WHITE);
     this.jlCurrentMode.setBounds(BTTC_WIDTH - (BTTC_WIDTH / 4) + 10, 180, BTTC_WIDTH / 2, 55);
@@ -67,8 +73,9 @@ public class MenuPrincipal extends JFrame {
     jpButtonsContainer.add(jbPlay);
     jpButtonsContainer.add(jlCurrentMode);
 
-    MenuPrincipalController mpc = new MenuPrincipalController(this);
+    
     jbMode.addActionListener(mpc);
+    jbPlay.addActionListener(mpc);
 
     add(jpButtonsContainer);
 
@@ -86,18 +93,15 @@ public class MenuPrincipal extends JFrame {
     add(jlTitulo);
   }
 
-
-
-
   public void setCurrentMode(String mode) {
-    this.jlCurrentMode.setText("Modo: " + mode);
+    this.jlCurrentMode.setText("Modo: " + player1Nickname + " " + player2Nickname);
   }
 
   private void setHovers() {
-    Utils.jbHoverSwitchBg(this.jbPlay, Utils.LIGHT_GREEN, Utils.DARK_GREEN);
-    Utils.jbHoverSwitchBg(this.jbDesc, Utils.LIGHT_BLUE, Utils.DARK_BLUE);
-    Utils.jbHoverSwitchBg(this.jbMode, Utils.LIGHT_BLUE, Utils.DARK_BLUE);
-    Utils.jbHoverSwitchBg(this.jbInfo, Utils.LIGHT_BLUE, Utils.DARK_BLUE);
+    Utils.jbHoverSwitchBg(this.jbPlay, Utils.LIGHT_GREEN, Utils.DARK_GREEN, Color.BLACK, Color.BLACK);
+    Utils.jbHoverSwitchBg(this.jbDesc, Utils.LIGHT_BLUE, Utils.DARK_BLUE, Color.BLACK, Color.WHITE);
+    Utils.jbHoverSwitchBg(this.jbMode, Utils.LIGHT_BLUE, Utils.DARK_BLUE, Color.BLACK, Color.WHITE);
+    Utils.jbHoverSwitchBg(this.jbInfo, Utils.LIGHT_BLUE, Utils.DARK_BLUE, Color.BLACK, Color.WHITE);
   }
 
   private void initJButtons() { 

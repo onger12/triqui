@@ -19,7 +19,7 @@ public class Modes extends JFrame {
     this.mp = mp;
 
     setSize(WIDTH, HEIGHT);
-    setLocationRelativeTo(null);
+    setLocationRelativeTo(mp);
     setResizable(false);
     getContentPane().setBackground(Color.white);
     getContentPane().setBackground(Utils.BG_BLUE);
@@ -43,9 +43,9 @@ public class Modes extends JFrame {
 
     ModesController mc = new ModesController(this, mp);
 
-    Utils.jbHoverSwitchBg(jbPvP, Utils.LIGHT_BLUE, Utils.DARK_BLUE);
-    Utils.jbHoverSwitchBg(jbCom, Utils.LIGHT_BLUE, Utils.DARK_BLUE);
-    Utils.jbHoverSwitchBg(jbCancel, Utils.CANCEL_LIGHT_COLOR, Utils.CANCEL_COLOR);
+    Utils.jbHoverSwitchBg(jbPvP, Utils.LIGHT_BLUE, Utils.DARK_BLUE, Color.BLACK, Color.WHITE);
+    Utils.jbHoverSwitchBg(jbCom, Utils.LIGHT_BLUE, Utils.DARK_BLUE, Color.BLACK, Color.WHITE);
+    Utils.jbHoverSwitchBg(jbCancel, Utils.CANCEL_LIGHT_COLOR, Utils.CANCEL_COLOR, Color.BLACK, Color.WHITE);
 
     jbPvP.addActionListener(mc);
     jbCom.addActionListener(mc);

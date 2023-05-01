@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import utils.Utils;
 import view.MenuPrincipal;
 import view.Modes;
 
@@ -27,13 +28,13 @@ public class ModesController implements ActionListener {
       return;
     }
     if(e.getSource().equals(m.jbPvP)) {
-      mp.setCurrentMode("PvP");
+      mp.CURRENT_MODE = Utils.PVP_MODE;
       m.dispose();
       m.setVisible(false);
       return;
     }
     if(e.getSource().equals(m.jbCom)) {
-      mp.setCurrentMode("COM");
+      mp.CURRENT_MODE = Utils.COM_MODE;
       m.dispose();
       m.setVisible(false);
       return;

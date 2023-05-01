@@ -20,7 +20,7 @@ public class Utils {
     CANCEL_LIGHT_COLOR = new Color(231, 111, 81), 
     LIGHT_GREEN = new Color(199, 249, 204), 
     DARK_GREEN = new  Color(87, 204, 153);
-  public int 
+  public static int 
     PVP_MODE = 1,
     COM_MODE = 2;
 
@@ -37,16 +37,16 @@ public class Utils {
     button.setFont(new Font("Fira Code", Font.BOLD, 13));
     return button;
   }
-  public static void jbHoverSwitchBg (JButton jb, Color colorHover, Color colorInitial) {
+  public static void jbHoverSwitchBg (JButton jb, Color colorHover, Color colorInitial, Color fontColorHover, Color fontColorInitial) {
     jb.addMouseListener(new java.awt.event.MouseAdapter() {
       public void mouseEntered(java.awt.event.MouseEvent evt) {
           jb.setBackground(colorHover);
-          jb.setForeground(Color.BLACK);
+          jb.setForeground(fontColorHover);
       }
   
       public void mouseExited(java.awt.event.MouseEvent evt) {
           jb.setBackground(colorInitial);
-          jb.setForeground(Color.WHITE);
+          jb.setForeground(fontColorInitial);
       }
   });
   }

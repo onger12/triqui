@@ -1,8 +1,8 @@
-import view.MenuPrincipal;
-import view.Modes;
+import view.Tablero;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        MenuPrincipal mp = new MenuPrincipal();
+        // MenuPrincipal mp = new MenuPrincipal();
+        Tablero tb = new Tablero(null);
     }
 }
