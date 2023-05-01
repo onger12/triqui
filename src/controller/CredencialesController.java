@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import utils.Utils;
 import view.Credenciales;
 import view.MenuPrincipal;
+import view.Tablero;
 
 public class CredencialesController implements ActionListener {
 
@@ -20,16 +21,20 @@ public class CredencialesController implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if(e.getSource().equals(c.jbEnviar)) {
+    if(e.getSource().equals(c.jbJugar)) {
       if(c.mode == Utils.COM_MODE) {
         mp.player1Nickname = c.jtfPlayer1Nickname.getText();
         mp.jlCurrentMode.setText(mp.player1Nickname);
+        mp.setVisible(false);
+        mp.t = new Tablero(mp);
         c.setVisible(false);
         c.dispose();
       }else if(c.mode == Utils.PVP_MODE) {
         mp.player1Nickname = c.jtfPlayer1Nickname.getText();
         mp.player2Nickname = c.jtfPlayer2Nickname.getText();
         mp.jlCurrentMode.setText(mp.player1Nickname + " - " + mp.player2Nickname);
+        mp.setVisible(false);
+        mp.t = new Tablero(mp);
         c.setVisible(false);
         c.dispose();
       }

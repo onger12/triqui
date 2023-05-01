@@ -23,6 +23,12 @@ public class Utils {
   public static int 
     PVP_MODE = 1,
     COM_MODE = 2;
+  public static int 
+    PLAYER_1 = 0,
+    PLAYER_2 = 1;
+  public static int 
+    FICHA_1 = 0,
+    FICHA_2 = 1;
 
   // methods
   public static JButton createSimpleButton(String text, Color bgColor, Color borderColor, Color fontColor) {

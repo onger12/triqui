@@ -21,7 +21,7 @@ public class MenuPrincipalController implements ActionListener {
       mp.m.setVisible(true);
     }
     if(e.getSource().equals(mp.jbPlay)) {
-      System.out.println(mp.CURRENT_MODE);
+      // System.out.println(mp.CURRENT_MODE);
       mp.c = new Credenciales(mp);
       // mp.setVisible(false);
     }

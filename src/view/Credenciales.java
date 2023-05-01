@@ -18,11 +18,11 @@ public class Credenciales extends JFrame {
   public int mode;
   public JTextField jtfPlayer1Nickname, jtfPlayer2Nickname;
   public JLabel jlPlayer1Nickname, jlPlayer2Nickname;
-  public JButton jbEnviar;
+  public JButton jbJugar;
   CredencialesController cc;
 
   public Credenciales(MenuPrincipal mp) {
-    super("Nickname");
+    super("CREDENCIALES");
     this.mode = mp.CURRENT_MODE;
     this.cc = new CredencialesController(this, mp);
 
@@ -33,7 +33,7 @@ public class Credenciales extends JFrame {
     getContentPane().setBackground(Utils.DARK_BLUE);
 
     setLayout(null);
-    createGUI();
+    createGUI(); // ESTA DE ACA
     setVisible(true);
   }
 
@@ -61,14 +61,14 @@ public class Credenciales extends JFrame {
     jtfPlayer1Nickname.setBounds(15, 40, 300, 35);
     jtfPlayer1Nickname.setFont(new Font("Arial", Font.PLAIN, 20));
     
-    jbEnviar = Utils.createSimpleButton("Enviar", Utils.LIGHT_GREEN, Utils.LIGHT_GREEN, Color.BLACK);
-    Utils.jbHoverSwitchBg(jbEnviar, Utils.DARK_GREEN, Utils.LIGHT_GREEN, Color.BLACK, Color.BLACK);
-    jbEnviar.setBounds(100, 85, 150, 35);
-    jbEnviar.addActionListener(cc);
+    jbJugar = Utils.createSimpleButton("Enviar", Utils.LIGHT_GREEN, Utils.LIGHT_GREEN, Color.BLACK);
+    Utils.jbHoverSwitchBg(jbJugar, Utils.DARK_GREEN, Utils.LIGHT_GREEN, Color.BLACK, Color.BLACK);
+    jbJugar.setBounds(100, 85, 150, 35);
+    jbJugar.addActionListener(cc);
 
     form.add(jlPlayer1Nickname);
     form.add(jtfPlayer1Nickname);
-    form.add(jbEnviar);
+    form.add(jbJugar);
     add(form);
   }
 
@@ -96,16 +96,16 @@ public class Credenciales extends JFrame {
     jtfPlayer2Nickname.setBounds(15, 125, 300, 35);
     jtfPlayer2Nickname.setFont(new Font("Arial", Font.PLAIN, 20));
     
-    jbEnviar = Utils.createSimpleButton("Enviar", Utils.LIGHT_GREEN, Utils.LIGHT_GREEN, Color.BLACK);
-    Utils.jbHoverSwitchBg(jbEnviar, Utils.DARK_GREEN, Utils.LIGHT_GREEN, Color.BLACK, Color.BLACK);
-    jbEnviar.setBounds(100, 170, 150, 35);
-    jbEnviar.addActionListener(cc);
+    jbJugar = Utils.createSimpleButton("JUGAR", Utils.LIGHT_GREEN, Utils.LIGHT_GREEN, Color.BLACK);
+    Utils.jbHoverSwitchBg(jbJugar, Utils.DARK_GREEN, Utils.LIGHT_GREEN, Color.BLACK, Color.BLACK);
+    jbJugar.setBounds(100, 170, 150, 35);
+    jbJugar.addActionListener(cc);
 
     form.add(jlPlayer1Nickname);
     form.add(jlPlayer2Nickname);
     form.add(jtfPlayer1Nickname);
     form.add(jtfPlayer2Nickname);
-    form.add(jbEnviar);
+    form.add(jbJugar);
     add(form);
   }
 }

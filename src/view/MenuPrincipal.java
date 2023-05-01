@@ -17,12 +17,13 @@ public class MenuPrincipal extends JFrame {
   private final int WIDTH = 800, HEIGHT = 800;
   
   public Modes m;
+  public Tablero t;
   public Credenciales c;
+
   public JLabel jlTitulo, jlBanner, jlCurrentMode;
   public JButton jbInfo, jbMode, jbDesc, jbPlay;
   public JPanel jpButtonsContainer;
   public String player1Nickname, player2Nickname;
-  Tablero t;
   private MenuPrincipalController mpc;
 
   // constants
@@ -32,13 +33,13 @@ public class MenuPrincipal extends JFrame {
   int 
     BTTC_WIDTH = (WIDTH / 4) * 3,  // BTTC_WIDTH : ButtonContainerWidth
     BTTC_HEIGHT = (BTN_MAIN_HEIGHT * BTN_COUNT) + (BTN_MAIN_VERTICAL_MARGIN * (BTN_COUNT - 1)); // BTTC_HEIGHT : ButtonContainerHeight
+    
   public int CURRENT_MODE = Utils.COM_MODE;
 
   public MenuPrincipal() {
     super("Triqui");
     this.m = new Modes(this);
     this.mpc = new MenuPrincipalController(this);
-    this.t = new Tablero(this);
 
     setSize(WIDTH, HEIGHT);
     setLocationRelativeTo(null);
