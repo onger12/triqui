@@ -3,7 +3,11 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.SwingUtilities;
+
 import view.Credenciales;
+import view.Descripcion;
+import view.Info;
 import view.MenuPrincipal;
 
 public class MenuPrincipalController implements ActionListener {
@@ -24,6 +28,14 @@ public class MenuPrincipalController implements ActionListener {
       // System.out.println(mp.CURRENT_MODE);
       mp.c = new Credenciales(mp);
       // mp.setVisible(false);
+    }
+    if(e.getSource().equals(mp.jbInfo)) {
+      SwingUtilities.invokeLater(() -> {
+        Info.createAndShowGUI();
+      });
+    }
+    if(e.getSource().equals(mp.jbDesc)) {
+      new Descripcion();
     }
   }
   

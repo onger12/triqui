@@ -19,6 +19,7 @@ public class MenuPrincipal extends JFrame {
   public Modes m;
   public Tablero t;
   public Credenciales c;
+  public Info i;
 
   public JLabel jlTitulo, jlBanner, jlCurrentMode;
   public JButton jbInfo, jbMode, jbDesc, jbPlay;
@@ -62,21 +63,22 @@ public class MenuPrincipal extends JFrame {
     setHovers();
 
     // init current mode jlabel
-    this.jlCurrentMode = new JLabel(player1Nickname);
-    jlCurrentMode.setFont(new Font("Fira Code", Font.PLAIN, 15));
+    this.jlCurrentMode = new JLabel(this.CURRENT_MODE == Utils.COM_MODE ? "Modo de juego: COM" : "Modo de juego: PVP");
+    jlCurrentMode.setFont(new Font("Fira Code", Font.PLAIN, 25));
     jlCurrentMode.setForeground(Color.WHITE);
-    this.jlCurrentMode.setBounds(BTTC_WIDTH - (BTTC_WIDTH / 4) + 10, 180, BTTC_WIDTH / 2, 55);
+    this.jlCurrentMode.setBounds((WIDTH - 350) / 2, 350 + BTTC_HEIGHT + 15, 350, 55);
     
     // add buttons to ButtonsContainer
     jpButtonsContainer.add(jbMode);
     jpButtonsContainer.add(jbDesc);
     jpButtonsContainer.add(jbInfo);
     jpButtonsContainer.add(jbPlay);
-    jpButtonsContainer.add(jlCurrentMode);
-
+    add(jlCurrentMode);
     
     jbMode.addActionListener(mpc);
     jbPlay.addActionListener(mpc);
+    jbInfo.addActionListener(mpc);
+    jbDesc.addActionListener(mpc);
 
     add(jpButtonsContainer);
 

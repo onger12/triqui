@@ -29,12 +29,14 @@ public class ModesController implements ActionListener {
     }
     if(e.getSource().equals(m.jbPvP)) {
       mp.CURRENT_MODE = Utils.PVP_MODE;
+      mp.jlCurrentMode.setText("Modo de juego: PVP");
       m.dispose();
       m.setVisible(false);
       return;
     }
     if(e.getSource().equals(m.jbCom)) {
       mp.CURRENT_MODE = Utils.COM_MODE;
+      mp.jlCurrentMode.setText("Modo de juego: COM");
       m.dispose();
       m.setVisible(false);
       return;

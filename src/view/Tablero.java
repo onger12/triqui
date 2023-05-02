@@ -17,23 +17,30 @@ import utils.Utils;
 
 public class Tablero extends JFrame {
   
-  private final int WIDTH = 600, HEIGHT = 700;
+  private final int WIDTH = 600, HEIGHT = 800;
   
   private MenuPrincipal mp;
   private JPanel jpButtonsContainer;
   private TableroController tc;
-  private JLabel jlTitle, jlNickname1, jlNickname2;
+  private JLabel 
+    jlTitle, 
+    jlNickname1, 
+    jlNickname2,
+    jlGanador;
   public JButton 
     jb11, jb12, jb13,
     jb21, jb22, jb23,
-    jb31, jb32, jb33;
+    jb31, jb32, jb33,
+    jbReiniciar, jbTerminar;
 
   public int CURRENT_PLAYER;
   public int CURRENT_FICHA;
   public Color jlabelInitialBgColor;
   public ImageIcon 
     FICHA_1_ICON,
-    FICHA_2_ICON;
+    FICHA_2_ICON,
+    FICHA_1_ICON_SMALL,
+    FICHA_2_ICON_SMALL;
   
   public int[][] TABLERO_MATRIZ;
 
@@ -48,6 +55,8 @@ public class Tablero extends JFrame {
     this.jlabelInitialBgColor = new JLabel("").getBackground();
     FICHA_1_ICON = new ImageIcon("src/assets/o.png");
     FICHA_2_ICON = new ImageIcon("src/assets/x.png");
+    FICHA_1_ICON_SMALL = new ImageIcon("src/assets/o_small.png");
+    FICHA_2_ICON_SMALL = new ImageIcon("src/assets/x_small.png");
 
     initTableroMatriz();
 
@@ -92,15 +101,15 @@ public class Tablero extends JFrame {
   private void createButtons () {
     jpButtonsContainer = new JPanel(new GridLayout(3, 3));
     jpButtonsContainer.setBounds(75, 170, 450, 450);
-    jb11 = new JButton("11");
-    jb12 = new JButton("12");
-    jb13 = new JButton("13");
-    jb21 = new JButton("21");
-    jb22 = new JButton("22");
-    jb23 = new JButton("23");
-    jb31 = new JButton("31");
-    jb32 = new JButton("32");
-    jb33 = new JButton("33");
+    jb11 = new JButton("");
+    jb12 = new JButton("");
+    jb13 = new JButton("");
+    jb21 = new JButton("");
+    jb22 = new JButton("");
+    jb23 = new JButton("");
+    jb31 = new JButton("");
+    jb32 = new JButton("");
+    jb33 = new JButton("");
 
     jb11.addActionListener(tc);
     jb12.addActionListener(tc);
@@ -127,8 +136,10 @@ public class Tablero extends JFrame {
   private void createPVPNicknames () {
     jlNickname1 = new JLabel("<html><center>" + mp.player1Nickname + "</html></center>");
     jlNickname2 = new JLabel(mp.player2Nickname);
+    jlGanador = new JLabel("");
     jlNickname1.setBounds(20, 85, 180, 55);
     jlNickname2.setBounds(400, 85, 180, 55);
+    jlGanador.setBounds(150, 685, 300, 55);
     jlNickname1.setFont(new Font("Fira Code", Font.BOLD, 20));
     jlNickname1.setForeground(Color.WHITE);
     jlNickname2.setFont(new Font("Fira Code", Font.BOLD, 20));
@@ -136,6 +147,29 @@ public class Tablero extends JFrame {
     Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE);
     jlNickname1.setBorder(border);
     jlNickname2.setBorder(border);
+
+    if(this.CURRENT_PLAYER == Utils.PLAYER_1) {
+      if(this.CURRENT_FICHA == Utils.FICHA_1) {
+        jlNickname1.setIcon(this.FICHA_1_ICON_SMALL);
+        jlNickname2.setIcon(this.FICHA_2_ICON_SMALL);
+      }else {
+        jlNickname1.setIcon(this.FICHA_2_ICON_SMALL);
+        jlNickname2.setIcon(this.FICHA_1_ICON_SMALL);
+      }
+    } else{
+      if(this.CURRENT_FICHA == Utils.FICHA_1) {
+        jlNickname1.setIcon(this.FICHA_2_ICON_SMALL);
+        jlNickname2.setIcon(this.FICHA_1_ICON_SMALL);
+      }else {
+        jlNickname1.setIcon(this.FICHA_1_ICON_SMALL);
+        jlNickname2.setIcon(this.FICHA_2_ICON_SMALL);
+      }
+    }
+
+    jbReiniciar = new JButton("Reiniciar");
+    jbReiniciar.setBounds(20, 635, 150, 30);
+    jbTerminar = new JButton("Terminar");
+    jbTerminar.setBounds(420, 635, 150, 30);
     
     if(this.CURRENT_PLAYER == Utils.PLAYER_1) {
       jlNickname1.setBackground(Color.GREEN);
@@ -144,8 +178,13 @@ public class Tablero extends JFrame {
       jlNickname2.setBackground(Color.GREEN);
       jlNickname2.setOpaque(true);
     }
+    jbReiniciar.addActionListener(tc);
+    jbTerminar.addActionListener(tc);
+    add(jbReiniciar);
+    add(jbTerminar);
     add(jlNickname1);
     add(jlNickname2);
+    add(jlGanador);
   }
   
   public void changeCurrentMode () {
@@ -167,7 +206,7 @@ public class Tablero extends JFrame {
   public void changeCurrentFicha () {
     if(this.CURRENT_FICHA == Utils.FICHA_1) {
       this.CURRENT_FICHA = Utils.FICHA_2;
-    }else {
+    } else {
       this.CURRENT_FICHA = Utils.FICHA_1;
     }
   }
@@ -177,7 +216,6 @@ public class Tablero extends JFrame {
     for(int i = 0; i < 3; i++) {
       for(int j = 0; j < 3; j++) {
         this.TABLERO_MATRIZ[i][j] = 0;
-        System.out.print(TABLERO_MATRIZ[i][j] + " ");
       }
       System.out.println("");
     }
@@ -200,7 +238,8 @@ public class Tablero extends JFrame {
         this.TABLERO_MATRIZ[i][1] == 1 &&
         this.TABLERO_MATRIZ[i][2] == 1
       ) {
-        System.out.println("Ganaste 1");
+        this.jlGanador.setText("Ganador: " + this.mp.player1Nickname);
+        disableAllButtons();
         break;
       }
     }
@@ -210,7 +249,8 @@ public class Tablero extends JFrame {
         this.TABLERO_MATRIZ[1][i] == 1 &&
         this.TABLERO_MATRIZ[2][i] == 1
       ) {
-        System.out.println("Ganaste 1");
+        this.jlGanador.setText("Ganador: " + this.mp.player1Nickname);
+        disableAllButtons();
         break;
       }
     }
@@ -219,13 +259,15 @@ public class Tablero extends JFrame {
       this.TABLERO_MATRIZ[1][1] == 1 &&
       this.TABLERO_MATRIZ[2][2] == 1
     ) {
-      System.out.println("Ganaste 1");
+      this.jlGanador.setText("Ganador: " + this.mp.player1Nickname);
+      disableAllButtons();
     } else if(
       this.TABLERO_MATRIZ[0][2] == 1 &&
       this.TABLERO_MATRIZ[1][1] == 1 &&
       this.TABLERO_MATRIZ[2][0] == 1
     ) {
-      System.out.println("Ganaste 1");
+      this.jlGanador.setText("Ganador: " + this.mp.player1Nickname);
+      disableAllButtons();
     }
 
     // player 2
@@ -235,7 +277,8 @@ public class Tablero extends JFrame {
         this.TABLERO_MATRIZ[i][1] == 2 &&
         this.TABLERO_MATRIZ[i][2] == 2
       ) {
-        System.out.println("Ganaste 2");
+        this.jlGanador.setText("Ganador: " + this.mp.player2Nickname);
+        disableAllButtons();
         break;
       }
     }
@@ -245,7 +288,8 @@ public class Tablero extends JFrame {
         this.TABLERO_MATRIZ[1][i] == 2 &&
         this.TABLERO_MATRIZ[2][i] == 2
       ) {
-        System.out.println("Ganaste 2");
+        this.jlGanador.setText("Ganador: " + this.mp.player2Nickname);
+        disableAllButtons();
         break;
       }
     }
@@ -254,13 +298,38 @@ public class Tablero extends JFrame {
       this.TABLERO_MATRIZ[1][1] == 2 &&
       this.TABLERO_MATRIZ[2][2] == 2
     ) {
-      System.out.println("Ganaste 2");
+      this.jlGanador.setText("Ganador: " + this.mp.player2Nickname);
+      disableAllButtons();
     } else if(
       this.TABLERO_MATRIZ[0][2] == 2 &&
       this.TABLERO_MATRIZ[1][1] == 2 &&
       this.TABLERO_MATRIZ[2][0] == 2
     ) {
-      System.out.println("Ganaste 2");
+      this.jlGanador.setText("Ganador: " + this.mp.player2Nickname);
+      disableAllButtons();
     }
+  }
+
+  public void terminarJuego() {
+    this.setVisible(false);
+    this.mp.setVisible(true);
+    this.dispose();
+  }
+
+  public void reiniciarJuego() {
+    this.setVisible(false);
+    new Tablero(mp);
+  }
+
+  private void disableAllButtons () {
+    this.jb11.setEnabled(false);
+    this.jb12.setEnabled(false);
+    this.jb13.setEnabled(false);
+    this.jb21.setEnabled(false);
+    this.jb22.setEnabled(false);
+    this.jb23.setEnabled(false);
+    this.jb31.setEnabled(false);
+    this.jb32.setEnabled(false);
+    this.jb33.setEnabled(false);
   }
 }
